@@ -24,6 +24,7 @@ body {
 p {
   margin-bottom: 0;
   padding: 0.5vw;
+  text-align: center;
 }
 
 img {
@@ -59,8 +60,6 @@ img {
 }
 
 .topnav a.active {
-  background-color: #ff0000;
-  color: #ffffff;
   border-radius: 15px;
 }
 
@@ -168,6 +167,10 @@ main {
   overflow: auto;
   background-color: rgba(26, 39, 156, 0.4);
 }
+.confirm-modal-message {
+  min-height: 7px;
+  padding: 70% 5%;
+}
 
 .content {
   margin: 5% auto;
@@ -226,12 +229,14 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
+
 input[data-error]::after {
     content: attr(data-error);
     font-size: 0.4em;
     color: red;
-} */
+    position: absolute;
+    top: 20px;
+} 
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -321,6 +326,7 @@ input[data-error]::after {
 .close:after {
   transform: rotate(-45deg);
 }
+.confirm-modal-btn,
 .btn-submit,
 .btn-signup {
   background: #fe142f;
@@ -328,10 +334,14 @@ input[data-error]::after {
   margin: 0 auto;
   border-radius: 7px;
   font-size: 1rem;
-  padding: 12px 82px;
+  padding: 14px;
   color: #fff;
   cursor: pointer;
   border: 0;
+  text-align: center;
+}
+.confirm-modal-btn {
+  margin-bottom: 1rem;
 }
 /* custom select styles */
 .custom-select {
@@ -495,12 +505,13 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
+    font-size: 2rem;
     white-space: normal;
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    text-align: inherit;
   }
   .hero-img img {
     border-radius: 10px;
