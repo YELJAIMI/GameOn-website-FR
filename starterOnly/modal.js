@@ -12,8 +12,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const form = document.querySelector("form");
-const tournamentCity = document.querySelector(".text-label");
-const tournament = document.querySelector(".checkbox-input[location]");
+const tournamentCity = document.querySelector(".location");
 const confirmModal = document.querySelector(".confirm-modal");
 const confirmModalBtn = document.querySelector(".confirm-modal-btn");
 const content = document.querySelector(".content");
@@ -43,15 +42,16 @@ function validate(){
   const birthdate = document.getElementById("birthdate").value;
   const quantity = document.getElementById("quantity").value;
   const checkboxInput = document.getElementById("checkbox1").value;
-  const confirmModal = document.getElementById("confirm-modal");
-  
+  const confirmModal = document.getElementById("confirm-modal");  
+
   Validname(nom);
   Validname(prenom);
   Validmail(email);
   Validbirthdate(birthdate);
   Validquantity(quantity);
+  ValidtournamentCity(location);
 }
-
+//verify Input
 function Validname(input){
   const regexnom = /^[a-z é-]+$/i;
   console.log(input);
@@ -61,6 +61,7 @@ function Validname(input){
   else{console.log("KO");}
   
 }
+//verify e-mail
 function Validmail(email){
   const regexmail = /^\S+@\S+\.\S+$/;
   console.log(email);
@@ -70,6 +71,7 @@ function Validmail(email){
     formData[2].setAttribute("data-error-visible", "false");
   }
 }
+//verify birthdate
 function Validbirthdate(birthdate){
   const regexbirthdate = /^\d{4}\-\d{1,2}\-\d{1,2}$/;
    console.log(birthdate);
@@ -79,16 +81,27 @@ function Validbirthdate(birthdate){
     formData[3].setAttribute("dara-error-visible", "false");
   }
 }
+//verify quantity
 function Validquantity(quantity){
   const regexquantity = /[^A-Za-z<>()\[\]\\.,;:\s@"][0-9]{0,}/
   console.log(quantity);
   if(quantity && regexquantity.test(quantity)){
     formData[4].setAttribute("data-error-visible", "true");
     formData[4].setAttribute("data-error", "veuillez indiquer le nombre de tournoi");
+    return false;
   }else{
     formData[4].setAttribute("data-error-visible", "false");
   }
 }
+//verify location
+function tournament(location){
+  if(document.querySelector('input[name="location"]:checked') ===null){
+    formData[5].setAttribute("data-error-visible", "true");
+  }else{
+    formData[5].setAttribute("data-error-visible", "false");
+  }
+}
+
 var Form = document.getElementById("form");
 //form.addEventListener('click', verif);
 
