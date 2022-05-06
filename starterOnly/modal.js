@@ -12,12 +12,11 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const form = document.querySelector("form");
-const tournamentCity = document.querySelector(".location");
 const confirmModal = document.querySelector(".confirm-modal");
 const confirmModalBtn = document.querySelector(".confirm-modal-btn");
 const content = document.querySelector(".content");
 const confirmClose = document.querySelector(".confirm-close");
-const locationInput = document.querySelectorAll(".chekbox-input");
+
 
 confirmModal.style.display = "none";
 // launch modal event
@@ -36,69 +35,114 @@ function closeModal(){
 
 
 function validate(){
-  const nom = document.getElementById("last").value;
   const prenom = document.getElementById("first").value;
+  const nom = document.getElementById("last").value;
   const email = document.getElementById("email").value;
   const birthdate = document.getElementById("birthdate").value;
   const quantity = document.getElementById("quantity").value;
-  const checkboxInput = document.getElementById("checkbox1").value;
-  const confirmModal = document.getElementById("confirm-modal");  
+  const location = document.getElementById('input[name="location"]');
+  const checkbox1 = document.getElementById("checkbox1");
+  const confirmModal = document.getElementById("confirm-modal");
 
   Validname(nom);
-  Validname(prenom);
+  Validfirst(prenom);
   Validmail(email);
   Validbirthdate(birthdate);
   Validquantity(quantity);
-  ValidtournamentCity(location);
+  Validlocation(location);
+  Validcheckbox1(checkbox1);
 }
-//verify Input
-function Validname(input){
+//verify prenom
+function Validfirst(prenom){
   const regexnom = /^[a-z é-]+$/i;
-  console.log(input);
-  if(input.length>2 && regexnom.test(input)){
-    console.log("ok");
+  console.log(prenom);
+  if(prenom.length>2 && regexnom.test(prenom)){
+    formData[0].setAttribute("data-error-visible", "false");
+    return false;
   }
-  else{console.log("KO");}
-  
+  else{
+    formData[0].setAttribute("data-error-visible", "true");
+    formData[0].setAttribute("data-error", "veuillez entrée un prenom valide");
+    return true;
+  }
+}
+//verify nom
+function Validname(nom){
+  const regexnom = /^[a-z é-]+$/i;
+  console.log(nom);
+  if(nom.length>2 && regexnom.test(nom)){
+    formData[1].setAttribute("data-error-visible", "false");
+    return false;
+  }
+  else{
+    formData[1].setAttribute("data-error-visible", "true");
+    formData[1].setAttribute("data-error", "veuillez entrée un nom valide");
+    return true;
+  }
 }
 //verify e-mail
 function Validmail(email){
   const regexmail = /^\S+@\S+\.\S+$/;
   console.log(email);
-  if(email && regexmail.test(email)){
-    formData[2].setAttribute("data-error-visible", "true");
-  }else{
+  if(regexmail.test(email)){
     formData[2].setAttribute("data-error-visible", "false");
+    return true;
+  }else{
+    formData[2].setAttribute("data-error-visible", "true");
+    formData[2].setAttribute("data-error", "veuillez entrée un e-mail valide");
+    return false;
   }
 }
 //verify birthdate
 function Validbirthdate(birthdate){
   const regexbirthdate = /^\d{4}\-\d{1,2}\-\d{1,2}$/;
    console.log(birthdate);
-  if(birthdate && regexbirthdate.test(birthdate)){
-    formData[3].setAttribute("data-error-visible", "true");
-  }else{
+  if(regexbirthdate.test(birthdate)){
     formData[3].setAttribute("dara-error-visible", "false");
+    return false;
+  }else{
+    formData[3].setAttribute("data-error-visible", "true");
+    formData[3].setAttribute("data-error", "veuillez saisir une date");
+    return true;
   }
 }
 //verify quantity
 function Validquantity(quantity){
-  const regexquantity = /[^A-Za-z<>()\[\]\\.,;:\s@"][0-9]{0,}/
+  const regexquantity = /^[0-9]{1,2}$/;
   console.log(quantity);
-  if(quantity && regexquantity.test(quantity)){
-    formData[4].setAttribute("data-error-visible", "true");
-    formData[4].setAttribute("data-error", "veuillez indiquer le nombre de tournoi");
-    return false;
-  }else{
+  if(regexquantity.test(quantity)){
     formData[4].setAttribute("data-error-visible", "false");
+    return false;
+  }
+  else{
+    formData[4].setAttribute("data-error-visible", "true");
+    formData[4].setAttribute("data-error", "veuillez indiquer le nombre de tournoi.");
+    return true;
   }
 }
-//verify location
-function tournament(location){
-  if(document.querySelector('input[name="location"]:checked') ===null){
+
+function Validlocation(location){
+  console.log(location);
+  if (document.querySelector('input[name="location"]:checked') ==null) {
     formData[5].setAttribute("data-error-visible", "true");
-  }else{
+    formData[5].setAttribute("data-error", "selectionner un tournoi.");
+    return false;
+    }
+    else{
     formData[5].setAttribute("data-error-visible", "false");
+    return true;
+    }
+}
+
+function Validcheckbox1(checkbox1){
+  console.log(checkbox1);
+  if(checkbox1.checked){
+    formData[6].setAttribute("data-error-visible", "false");
+    return false;
+  }else{
+    formData[6].setAttribute("data-error-visible", "true");
+    formData[6].setAttribute("data-error", "veuillez lire et accepter les conditions.");
+    return true;
   }
 }
 
