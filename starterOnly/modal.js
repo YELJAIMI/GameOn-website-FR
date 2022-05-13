@@ -12,13 +12,13 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const form = document.querySelector("form");
-const confirmModal = document.querySelector(".confirm-modal");
+//const confirmModal = document.querySelector(".confirm-modal");
 const confirmModalBtn = document.querySelector(".confirm-modal-btn");
 const content = document.querySelector(".content");
 const confirmClose = document.querySelector(".confirm-close");
 
 
-confirmModal.style.display = "none";
+//confirmModal.style.display = "none";
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -26,6 +26,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 function launchModal() {
   modalbg.style.display = "block";
 }
+
 const modalclose = document.querySelector(".close");
 modalclose.addEventListener("click",closeModal);
 
@@ -33,6 +34,17 @@ function closeModal(){
   modalbg.style.display = "none";
 }
 
+// on ferme la modal
+function closeConfirmModal(){ 
+  closeModal(); 
+  
+  const modalbg = document.querySelector(".modal-body");
+  modalbg.innerHTML  = "modal-body";
+  
+  form.style.display = "block"; 
+  form.reset(); 
+  modalbg.appendChild(form);
+}
 
 function validate(){
   const prenom = document.getElementById("first").value;
@@ -44,26 +56,42 @@ function validate(){
   const checkbox1 = document.getElementById("checkbox1");
   const confirmModal = document.getElementById("confirm-modal");
 
-  Validname(nom);
-  Validfirst(prenom);
-  Validmail(email);
-  Validbirthdate(birthdate);
-  Validquantity(quantity);
-  Validlocation(location);
-  Validcheckbox1(checkbox1);
+  const ValidnameReturn = Validname(nom);
+  const ValidfirstReturn = Validfirst(prenom);
+  const ValidmailReturn = Validmail(email);
+  const ValidbirthdateReturn = Validbirthdate(birthdate);
+  const ValidquantityReturn = Validquantity(quantity);
+  const ValidlocationReturn = Validlocation(location);
+  const Validcheckbox1Return = Validcheckbox1(checkbox1);
+
+  const formIsValid =
+  ValidnameReturn &&      
+  ValidfirstReturn&&   
+  ValidmailReturn&&     
+  ValidbirthdateReturn&&
+  ValidquantityReturn&&
+  ValidlocationReturn&&
+  Validcheckbox1Return;
+
+  console.log(formIsValid);
+
+  if(formIsValid){
+    Valid();
+  }
 }
+
 //verify prenom
 function Validfirst(prenom){
   const regexnom = /^[a-z é-]+$/i;
   console.log(prenom);
   if(prenom.length>2 && regexnom.test(prenom)){
     formData[0].setAttribute("data-error-visible", "false");
-    return false;
+    return true;
   }
   else{
     formData[0].setAttribute("data-error-visible", "true");
     formData[0].setAttribute("data-error", "veuillez entrée un prenom valide");
-    return true;
+    return false;
   }
 }
 //verify nom
@@ -72,12 +100,12 @@ function Validname(nom){
   console.log(nom);
   if(nom.length>2 && regexnom.test(nom)){
     formData[1].setAttribute("data-error-visible", "false");
-    return false;
+    return true;
   }
   else{
     formData[1].setAttribute("data-error-visible", "true");
     formData[1].setAttribute("data-error", "veuillez entrée un nom valide");
-    return true;
+    return false;
   }
 }
 //verify e-mail
@@ -99,11 +127,11 @@ function Validbirthdate(birthdate){
    console.log(birthdate);
   if(regexbirthdate.test(birthdate)){
     formData[3].setAttribute("dara-error-visible", "false");
-    return false;
+    return true;
   }else{
     formData[3].setAttribute("data-error-visible", "true");
     formData[3].setAttribute("data-error", "veuillez saisir une date");
-    return true;
+    return false;
   }
 }
 //verify quantity
@@ -112,12 +140,12 @@ function Validquantity(quantity){
   console.log(quantity);
   if(regexquantity.test(quantity)){
     formData[4].setAttribute("data-error-visible", "false");
-    return false;
+    return true;
   }
   else{
     formData[4].setAttribute("data-error-visible", "true");
     formData[4].setAttribute("data-error", "veuillez indiquer le nombre de tournoi.");
-    return true;
+    return false;
   }
 }
 
@@ -138,37 +166,61 @@ function Validcheckbox1(checkbox1){
   console.log(checkbox1);
   if(checkbox1.checked){
     formData[6].setAttribute("data-error-visible", "false");
-    return false;
+    return true;
   }else{
     formData[6].setAttribute("data-error-visible", "true");
     formData[6].setAttribute("data-error", "veuillez lire et accepter les conditions.");
-    return true;
+    return false;
   }
 }
 
-var Form = document.getElementById("form");
-//form.addEventListener('click', verif);
+/*var Form = document.getElementById("form");
+form.addEventListener('click', verif);
 
 function verif(){
-  var span = document.getElementById("formData");
-  var inputs = span.querySelectorAll("location");
+  //var span = document.getElementById("formData");
+  var Inputs = document.querySelectorAll("location");
   var response = document.getElementById("response");
 
-  for (var i = 0; i < inputs.length; ++i){
-    if (inputs[i].checked){
+  for (var i = 0; i < Inputs.length; ++i){
+    if (Inputs[i].checked){
       response.innerText += 'le bouton '+i+' est checked \r\n';
     }else{
       response.innerText += 'Le bouton '+i+' n\'est pas checked \r\n';
     }
   }
-}
+}*/
 
 function Valid() {
-  function closeConfirmModal(){
+  /*function closeConfirmModal(){
   confirmModal.style.display = "none";
   }
+  */
+  
+  closeModal();
+  form.style.display = "none";
+
+  const modalbg = document.querySelector(".modal-body");
+  modalbg.innerHTML =+ "<div class='confirmBodyModal' id='confirmBodyModal'>"+
+       " <div class='modal-body'>"+
+         " <div class='content'>"+
+          "  <span class='confirm-close'></span>"+
+          "  <p class='confirm-modal-message'>Merci pour votre réservation</p>"+
+          "  <button class='confirm-modal-btn'>Fermer</button>"+
+        "  </div>"+
+      "  </div>"+
+     " </div>";
+
+     launchModal();
+
+     const modalConfirmationClose = document.querySelector(".confirm-modal-btn");
+     modalConfirmationClose.addEventListener("click",closeConfirmModal); 
+
+     /*
   modalbg.style.display = "none";
   confirmModal.style.display = "flex";
   confirmModalBtn.addEventListener("click", closeConfirmModal);
   confirmModalClose.addEventListener("click", closeConfirmModal);
+  */
+
 }
