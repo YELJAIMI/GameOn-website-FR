@@ -32,7 +32,7 @@ function closeModal(){
   modalbg.style.display = "none";
 }
 
-// on ferme la modal
+// on ferme la modal et on la réinitialise
 function closeConfirmModal(){ 
   closeModal(); 
   
@@ -80,7 +80,7 @@ function validate(){
 
 //verify prenom
 function Validfirst(prenom){
-  const regexnom = /^[a-z é-]+$/i;
+  const regexnom = /^[a-zé-]+$/i;
   console.log(prenom);
   if(prenom.length>2 && regexnom.test(prenom)){
     formData[0].setAttribute("data-error-visible", "false");
@@ -94,8 +94,8 @@ function Validfirst(prenom){
 }
 //verify nom
 function Validname(nom){
-  const regexnom = /^[a-z é-]+$/i;
-  console.log(nom);
+  const regexnom = /^[a-zA-Z]+ [a-zA-Z]+$/;
+  console.log(nom.length);
   if(nom.length>2 && regexnom.test(nom)){
     formData[1].setAttribute("data-error-visible", "false");
     return true;
