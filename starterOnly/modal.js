@@ -12,13 +12,11 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const form = document.querySelector("form");
-//const confirmModal = document.querySelector(".confirm-modal");
 const confirmModalBtn = document.querySelector(".confirm-modal-btn");
 const content = document.querySelector(".content");
 const confirmClose = document.querySelector(".confirm-close");
 
 
-//confirmModal.style.display = "none";
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -149,6 +147,7 @@ function Validquantity(quantity){
   }
 }
 
+//verify location
 function Validlocation(location){
   console.log(location);
   if (document.querySelector('input[name="location"]:checked') ==null) {
@@ -162,6 +161,7 @@ function Validlocation(location){
     }
 }
 
+//read accept terms
 function Validcheckbox1(checkbox1){
   console.log(checkbox1);
   if(checkbox1.checked){
@@ -174,53 +174,24 @@ function Validcheckbox1(checkbox1){
   }
 }
 
-/*var Form = document.getElementById("form");
-form.addEventListener('click', verif);
-
-function verif(){
-  //var span = document.getElementById("formData");
-  var Inputs = document.querySelectorAll("location");
-  var response = document.getElementById("response");
-
-  for (var i = 0; i < Inputs.length; ++i){
-    if (Inputs[i].checked){
-      response.innerText += 'le bouton '+i+' est checked \r\n';
-    }else{
-      response.innerText += 'Le bouton '+i+' n\'est pas checked \r\n';
-    }
-  }
-}*/
-
+//close modal
 function Valid() {
-  /*function closeConfirmModal(){
-  confirmModal.style.display = "none";
-  }
-  */
-  
   closeModal();
   form.style.display = "none";
 
   const modalbg = document.querySelector(".modal-body");
   modalbg.innerHTML =+ "<div class='confirmBodyModal' id='confirmBodyModal'>"+
-       " <div class='modal-body'>"+
+      " <div class='modal-body'>"+
          " <div class='content'>"+
           "  <span class='confirm-close'></span>"+
           "  <p class='confirm-modal-message'>Merci pour votre réservation</p>"+
           "  <button class='confirm-modal-btn'>Fermer</button>"+
         "  </div>"+
       "  </div>"+
-     " </div>";
+    " </div>";
 
      launchModal();
 
      const modalConfirmationClose = document.querySelector(".confirm-modal-btn");
      modalConfirmationClose.addEventListener("click",closeConfirmModal); 
-
-     /*
-  modalbg.style.display = "none";
-  confirmModal.style.display = "flex";
-  confirmModalBtn.addEventListener("click", closeConfirmModal);
-  confirmModalClose.addEventListener("click", closeConfirmModal);
-  */
-
 }
