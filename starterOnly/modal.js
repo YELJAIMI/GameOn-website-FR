@@ -80,9 +80,9 @@ function validate(){
 
 //verify prenom
 function Validfirst(prenom){
-  const regexnom = /^[a-zé-]+$/i;
+  const regexprenom = /^[a-zA-Z '.-]+$/;
   console.log(prenom);
-  if(prenom.length>2 && regexnom.test(prenom)){
+  if(prenom.length>2 && regexprenom.test(prenom)){
     formData[0].setAttribute("data-error-visible", "false");
     return true;
   }
@@ -94,8 +94,8 @@ function Validfirst(prenom){
 }
 //verify nom
 function Validname(nom){
-  const regexnom = /^[a-zA-Z]+ [a-zA-Z]+$/;
-  console.log(nom.length);
+  const regexnom = /^[a-zA-Z '.-]*$/;
+  console.log(nom);
   if(nom.length>2 && regexnom.test(nom)){
     formData[1].setAttribute("data-error-visible", "false");
     return true;
